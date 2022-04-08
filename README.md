@@ -79,9 +79,9 @@ Para fazer um post é necessário usuário e login, portanto será trabalhada a 
 
   - Projeto individual.
 
-  - Serão `X` dias de projeto.
+  - Serão `3` dias de projeto.
 
-  - Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
+  - Data de entrega para avaliação final do projeto: `20/04/2022 14:00`.
 
 ---
 
@@ -91,9 +91,9 @@ Para fazer um post é necessário usuário e login, portanto será trabalhada a 
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com/tryber/sd-0x-project-blogs-api.git`.
+  * `git clone https://github.com/tryber/sd-016-b-project-blogs-api.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-0x-project-blogs-api`
+    * `cd sd-016-b-project-blogs-api`
 
 2. Instale as dependências [**Caso existam**]
   * `npm install`
@@ -105,7 +105,7 @@ Para fazer um post é necessário usuário e login, portanto será trabalhada a 
     * Exemplo: `git checkout master`
   * Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
     * Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    * Exemplo: `git checkout -b joaozinho-sd-0x-project-blogs-api`
+    * Exemplo: `git checkout -b joaozinho-sd-016-b-project-blogs-api`
 
 4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
   * Verifique que as mudanças ainda não estão no _stage_
@@ -120,16 +120,16 @@ Para fazer um post é necessário usuário e login, portanto será trabalhada a 
         * `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 5. Adicione a sua branch com o novo `commit` ao repositório remoto
-  * Usando o exemplo anterior: `git push -u origin joaozinho-sd-0x-project-blogs-api`
+  * Usando o exemplo anterior: `git push -u origin joaozinho-sd-016-b-project-blogs-api`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-0x-project-blogs-api/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-016-b-project-blogs-api/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-0x-project-blogs-api/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-016-b-project-blogs-api/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
@@ -177,7 +177,7 @@ Para garantir a qualidade do código, usaremos o [ESLint](https://eslint.org/) p
 
 Este projeto já vem com as dependências relacionadas ao _linter_ configuradas nos arquivos `package.json` nos seguintes caminhos:
 
-- `sd-0x-project-blogs-api/package.json`
+- `sd-016-b-project-blogs-api/package.json`
 
 Para poder rodar os `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
 
@@ -210,7 +210,7 @@ app.get('/', (request, response) => {
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivo:**
 
-`sd-0x-project-blogs-api/config/config.js`
+`sd-016-b-project-blogs-api/config/config.js`
 
 ```
 module.exports = {
@@ -1055,7 +1055,7 @@ Para **"entregar"** seu projeto, siga os passos a seguir:
 * Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas
   * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**
   * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-0x`
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-016-b`
 
 Se ainda houver alguma dúvida sobre como entregar seu projeto, [aqui tem um vídeo explicativo](https://vimeo.com/362189205).
 

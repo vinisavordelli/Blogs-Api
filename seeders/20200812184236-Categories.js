@@ -10,7 +10,8 @@ module.exports = {
           id: 2,
           name: 'Escola',
         },
-      ], { timestamps: false });
+      ],
+      { timestamps: false });
   },
 
   down: async (queryInterface, _Sequelize) => {

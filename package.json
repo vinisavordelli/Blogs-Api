@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.20.0",
     "dotenv": "8.2.0",
     "eslint-config-trybe-backend": "1.0.3",
     "express": "4.17.1",
     "http-status-codes": "^2.2.0",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "2.1.0",
     "sequelize": "6.3.4",

@@ -7,6 +7,9 @@ const createUser = async (req, res, next) => {
   const newUser = { displayName, email, password, image };
   try {
     const user = await UserService.createUser(newUser);
+    if (user.err) {
+      return res.status(StatusCodes.CONFLICT).json({ message: user.err.message });
+    }
     const token = createJWT(user);
     return res.status(StatusCodes.CREATED).json({ token });
   } catch (err) {

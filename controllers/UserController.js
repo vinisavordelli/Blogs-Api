@@ -1,13 +1,14 @@
 const { StatusCodes } = require('http-status-codes');
 const UserService = require('../services/UserService');
+const { createJWT } = require('../helpers/auth');
 
 const createUser = async (req, res, next) => {
   const { displayName, email, password, image } = req.body;
-  console.log(email);
   const newUser = { displayName, email, password, image };
   try {
     const user = await UserService.createUser(newUser);
-    return res.status(StatusCodes.CREATED).json(user);
+    const token = createJWT(user);
+    return res.status(StatusCodes.CREATED).json({ token });
   } catch (err) {
     console.log(err);
     next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });

@@ -1,6 +1,10 @@
 const { User } = require('../models');
 
 const createUser = async ({ displayName, email, password, image }) => {
+  const existingUser = await User.findOne({ where: { email } });
+  if (existingUser) {
+    return { message: 'User already registered' };
+  } 
   const user = await User.create({
     displayName,
     email,

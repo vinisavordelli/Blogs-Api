@@ -28,7 +28,22 @@ const findAll = async (_req, res, next) => {
   }
 };
 
+const findOne = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const user = await UserService.findOne(id);
+    if (user.err) {
+      return res.status(StatusCodes.NOT_FOUND).json({ message: user.err.message });
+    }
+    return res.status(StatusCodes.OK).json(user);
+  } catch (err) {
+    console.log(err);
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+  }
+};
+
 module.exports = {
   createUser,
   findAll,
+  findOne,
 };

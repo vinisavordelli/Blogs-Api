@@ -4,8 +4,8 @@ const CategoryService = require('../services/CategoryService');
 const createCategory = async (req, res, next) => {
   const { name } = req.body;
   try {
-    const user = await CategoryService.createCategory({ name });
-    return res.status(StatusCodes.OK).json(user);
+    const category = await CategoryService.createCategory({ name });
+    return res.status(StatusCodes.CREATED).json(category);
   } catch (err) {
     console.log(err);
     next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
@@ -14,8 +14,8 @@ const createCategory = async (req, res, next) => {
 
 const findAll = async (_req, res, next) => {
   try {
-    const users = await CategoryService.findAll();
-    return res.status(StatusCodes.OK).json(users);
+    const categories = await CategoryService.findAll();
+    return res.status(StatusCodes.OK).json(categories);
   } catch (err) {
     console.log(err);
     next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });

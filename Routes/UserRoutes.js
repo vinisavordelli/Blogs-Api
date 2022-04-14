@@ -10,6 +10,4 @@ router
 .get('/', ValidateToken, findAll)
 .get('/:id', ValidateToken, findOne);
 
-module.exports = {
-  UserRoutes: router,
-};
+module.exports = router;

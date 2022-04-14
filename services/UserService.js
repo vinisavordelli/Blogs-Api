@@ -24,7 +24,20 @@ const findAll = async () => {
   }
 };
 
+const findOne = async (id) => {
+  try {
+    const user = await User.findOne({ where: { id } });
+    if (!user) {
+      return { err: { message: 'User not found' } };
+    }
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   createUser,
   findAll,
+  findOne,
 };

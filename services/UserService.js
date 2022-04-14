@@ -28,7 +28,7 @@ const findOne = async (id) => {
   try {
     const user = await User.findOne({ where: { id } });
     if (!user) {
-      return { err: { message: 'User not found' } };
+      return { err: { message: 'User does not exist' } };
     }
     return user;
   } catch (err) {

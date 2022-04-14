@@ -1,6 +1,5 @@
 const express = require('express');
 const { findAll, createCategory } = require('../controllers/CategoryController');
-const { validateToken } = require('../helpers/auth');
 const { validateCategory } = require('../middlewares/ValidateCategory');
 const { ValidateToken } = require('../middlewares/ValidateToken');
 

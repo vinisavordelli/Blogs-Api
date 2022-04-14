@@ -10,3 +10,5 @@ const findAll = async (_req, res, next) => {
     next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
   }
 };
+
+module.exports = { findAll };

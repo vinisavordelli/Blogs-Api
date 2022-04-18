@@ -7,7 +7,8 @@ const ValidateToken = (req, res, next) => {
     return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not found' });
   }
   try {
-    validateToken(token);
+    const validation = validateToken(token);
+    req.userId = validation;
   } catch (error) {
     console.log(error);
     return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Expired or invalid token' });

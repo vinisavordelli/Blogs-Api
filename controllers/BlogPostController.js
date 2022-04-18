@@ -2,7 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const BlogPostService = require('../services/BlogPostService');
 
 const createPost = async (req, res, next) => {
-  const { userId } = req.params;
+  const { userId } = req;
   const { title, content, categoryIds } = req.body;
   const newPost = { title, content, categoryIds, userId };
   try {

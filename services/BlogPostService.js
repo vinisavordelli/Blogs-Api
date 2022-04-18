@@ -1,4 +1,23 @@
-const { BlogPost, User, Category } = require('../models');
+const { BlogPost, User, Category, PostCategory } = require('../models');
+
+const createPost = async ({ title, content, categoryIds, userId }) => {
+  try {
+    const newPost = await BlogPost.create({
+      userId,
+      title,
+      content,
+    });
+    categoryIds.forEach(async (categoryId) => {
+      const newPostCategory = { postId: newPost.id, categoryId };
+      await PostCategory.create(newPostCategory);
+    });
+
+    return newPost;
+  } catch (err) {
+    console.log(err);
+    return (`${userId + title + content + categoryIds}`);
+  }
+};
 
 const findAll = async () => {
   try {
@@ -34,4 +53,4 @@ const findOne = async (id) => {
   }
 };
 
-module.exports = { findAll, findOne };
+module.exports = { findAll, findOne, createPost };

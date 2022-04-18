@@ -16,7 +16,7 @@ return token;
 
 const validateToken = (token) => {
   const validate = jwt.verify(token, jwtSetup.secret);
-  return validate;
+  return validate.data.id;
 };
 
 module.exports = {

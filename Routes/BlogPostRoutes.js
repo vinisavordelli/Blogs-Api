@@ -1,5 +1,5 @@
 const express = require('express');
-const { findAll, findOne, createPost } = require('../controllers/BlogPostController');
+const { findAll, findOne, createPost, updatePost } = require('../controllers/BlogPostController');
 const {
   validateBlogPostCreation,
 } = require('../middlewares/ValidateBlogPost');
@@ -15,5 +15,6 @@ router
 ValidateToken,
 validateBlogPostCreation, 
 createPost,
-);
+)
+.put('/:id', ValidateToken, updatePost);
 module.exports = router;

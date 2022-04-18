@@ -41,12 +41,16 @@ const findOne = async (req, res, next) => {
 };
 
 const updatePost = async (req, res, next) => {
+  const { userId } = req;
   try {
   const { id } = req.params;
   const { title, content } = req.body;
   const updatedPost = await BlogPostService.updatePost(id, title, content);
   if (updatedPost.err) {
     return res.status(StatusCodes.NOT_FOUND).json({ message: updatedPost.err.message });
+  }
+  if (updatedPost.userId !== userId) {
+    return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Unauthorized user' });
   }
   return res.status(StatusCodes.OK).json(updatedPost);
 } catch (err) {

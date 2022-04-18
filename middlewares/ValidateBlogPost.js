@@ -2,10 +2,16 @@ const Joi = require('joi');
 const StatusCodes = require('http-status-codes');
 const Category = require('../services/CategoryService');
 
-const blogPostSchema = Joi.object({
+const createPostSchema = Joi.object({
   title: Joi.string().required(),
   content: Joi.string().required(),
   categoryIds: Joi.array().required(),
+});
+
+const updatePostSchema = Joi.object({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+  categoryIds: Joi.any(),
 });
 
 const validateCategoryExists = async (req) => {
@@ -18,7 +24,7 @@ const validateCategoryExists = async (req) => {
 };
 
 const validateBlogPostCreation = async (req, res, next) => {
-  const { error } = blogPostSchema.validate(req.body);
+  const { error } = createPostSchema.validate(req.body);
 
   if (error) {
     return res.status(StatusCodes.BAD_REQUEST).json({
@@ -34,7 +40,23 @@ const validateBlogPostCreation = async (req, res, next) => {
   next();
 };
 
+const validatePostUpdate = async (req, res, next) => {
+  const { error } = updatePostSchema.validate(req.body);
+
+  if (error) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: error.message,
+    });
+  }
+  const { categoryIds } = req.body;
+  if (categoryIds) {
+    return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Categories cannot be edited' });
+  }
+  next();
+};
+
 module.exports = {
   validateBlogPostCreation,
   validateCategoryExists,
+  validatePostUpdate,
 };

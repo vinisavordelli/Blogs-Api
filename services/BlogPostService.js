@@ -44,8 +44,27 @@ const findOne = async (id) => {
     return blogPost;
   } catch (err) {
     console.log(err);
-    return ('Category not found');
+    return ({ message: 'Unknown error' });
   }
 };
 
-module.exports = { findAll, findOne, createPost };
+const updatePost = async (id, title, content) => {
+  try {
+    await BlogPost.update({ title, content }, { where: { id } });
+
+    const updatedPost = await BlogPost.findOne({
+      where: { id },
+      attributes: ['title', 'content', 'userId'],
+      include: [
+         { model: Category, as: 'categories', through: { attributes: [] } },
+        ], 
+      });
+    
+    return updatedPost;
+  } catch (err) {
+    console.log(err);
+    return ({ message: 'Unknown error' });
+  }
+};
+
+module.exports = { findAll, findOne, createPost, updatePost };

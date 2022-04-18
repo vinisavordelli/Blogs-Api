@@ -11,9 +11,12 @@ const findAll = async (_req, res, next) => {
   }
 };
 
-const findById = async (req, res, next) => {
+const findOne = async (req, res, next) => {
   try {
-    const blogPost = await BlogPostService.findById(req.params.id);
+    const blogPost = await BlogPostService.findOne(req.params.id);
+    if (blogPost.err) {
+      return res.status(StatusCodes.NOT_FOUND).json({ message: blogPost.err.message });
+    }
     return res.status(StatusCodes.OK).json(blogPost);
   } catch (err) {
     console.log(err);
@@ -21,4 +24,4 @@ const findById = async (req, res, next) => {
   }
 };
 
-module.exports = { findAll };
+module.exports = { findAll, findOne };

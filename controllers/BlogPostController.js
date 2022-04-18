@@ -1,6 +1,22 @@
 const { StatusCodes } = require('http-status-codes');
 const BlogPostService = require('../services/BlogPostService');
 
+const createPost = async (req, res, next) => {
+  const { userId } = req.params;
+  const { title, content, categoryIds } = req.body;
+  const newPost = { title, content, categoryIds, userId };
+  try {
+    const post = await BlogPostService.createPost(newPost);
+    if (post.err) {
+      return res.status(StatusCodes.CONFLICT).json({ message: post.err.message });
+    }
+    return res.status(StatusCodes.CREATED).json(post);
+  } catch (err) {
+    console.log(err);
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+  }
+};
+
 const findAll = async (_req, res, next) => {
   try {
     const blogPosts = await BlogPostService.findAll();
@@ -24,4 +40,4 @@ const findOne = async (req, res, next) => {
   }
 };
 
-module.exports = { findAll, findOne };
+module.exports = { findAll, findOne, createPost };

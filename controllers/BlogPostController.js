@@ -11,4 +11,14 @@ const findAll = async (_req, res, next) => {
   }
 };
 
+const findById = async (req, res, next) => {
+  try {
+    const blogPost = await BlogPostService.findById(req.params.id);
+    return res.status(StatusCodes.OK).json(blogPost);
+  } catch (err) {
+    console.log(err);
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+  }
+};
+
 module.exports = { findAll };

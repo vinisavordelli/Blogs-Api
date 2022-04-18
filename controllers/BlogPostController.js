@@ -40,4 +40,19 @@ const findOne = async (req, res, next) => {
   }
 };
 
-module.exports = { findAll, findOne, createPost };
+const updatePost = async (req, res, next) => {
+  try {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const updatedPost = await BlogPostService.updatePost(id, title, content);
+  if (updatedPost.err) {
+    return res.status(StatusCodes.NOT_FOUND).json({ message: updatedPost.err.message });
+  }
+  return res.status(StatusCodes.OK).json(updatedPost);
+} catch (err) {
+  console.log(err);
+  next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+}
+};
+
+module.exports = { findAll, findOne, createPost, updatePost };

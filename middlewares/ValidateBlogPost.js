@@ -1,7 +1,6 @@
 const Joi = require('joi');
 const StatusCodes = require('http-status-codes');
 const Category = require('../services/CategoryService');
-const { findAll } = require('../services/BlogPostService');
 
 const blogPostSchema = Joi.object({
   title: Joi.string().required(),

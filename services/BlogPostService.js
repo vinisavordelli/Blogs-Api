@@ -1,7 +1,6 @@
 const { BlogPost, User, Category, PostCategory } = require('../models');
 
 const createPost = async ({ title, content, categoryIds, userId }) => {
-  try {
     const newPost = await BlogPost.create({
       userId,
       title,
@@ -13,10 +12,6 @@ const createPost = async ({ title, content, categoryIds, userId }) => {
     });
 
     return newPost;
-  } catch (err) {
-    console.log(err);
-    return (`${userId + title + content + categoryIds}`);
-  }
 };
 
 const findAll = async () => {

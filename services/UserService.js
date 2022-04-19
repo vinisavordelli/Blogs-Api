@@ -21,6 +21,7 @@ const findAll = async () => {
     return users;
   } catch (err) {
     console.log(err);
+    return ({ message: 'Unknown error' });
   }
 };
 
@@ -33,6 +34,17 @@ const findOne = async (id) => {
     return user;
   } catch (err) {
     console.log(err);
+    return ({ message: 'Unknown error' });
+  }
+};
+
+const deleteMe = async (id) => {
+  try {
+   const user = await User.destroy({ where: { id } });
+   return user;
+  } catch (err) {
+    console.log(err);
+    return ({ message: 'Unknown error' });
   }
 };
 
@@ -40,4 +52,5 @@ module.exports = {
   createUser,
   findAll,
   findOne,
+  deleteMe,
 };

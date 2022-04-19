@@ -1,6 +1,6 @@
 A ideia do projeto é simular o funcionamento do backend de um blog através da implementação de uma aplicação em Node.js usando o pacote sequelize para fazer um CRUD de posts. Para a realização do projeto, algumas metas deviam ser batidas e essas são descritas abaixo:
 
-#### 1 - A aplicação deve ter o endpoint POST `/user`
+### 1 - A aplicação deve ter o endpoint POST `/user`
 
 Aqui deve ser possível criar um usuário, caso o mesmo não exista. Para isso deve ser enviado à aplicação um objeto JSON contendo:
 
@@ -12,7 +12,7 @@ Caso o email já tenha sido cadastrado uma mensagem de erro deverá informar que
 
 Realizado o cadastro com sucesso a aplicação deverá devolver um token JWT que garantirá o acesso às funcionalidades da aplicação.
 
-#### 2 - A aplicação deve ter o endpoint POST `/login`
+### 2 - A aplicação deve ter o endpoint POST `/login`
 
 A aplicação deve possuir uma página de login caso o usuário já seja cadastrado. Nessa página um objeto JSON contendo email e senha deve ser enviado à aplicação. Caso seja informado dados válidos a aplicação devolverá um token de acesso, caso contrário ela devolverá um erro informando que os dados inseridos são inválidos.
 

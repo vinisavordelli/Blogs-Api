@@ -48,6 +48,19 @@ const findOne = async (id) => {
   }
 };
 
+const deletePost = async (id) => {
+  try {
+    const deletedPost = await BlogPost.destroy({ where: { id } });
+    if (!deletedPost) {
+      return { err: { message: 'Post does not exist' } };
+    }
+    return deletedPost;
+  } catch (err) {
+    console.log(err);
+    return ({ message: 'Unknown error' });
+  }
+};
+
 const updatePost = async (id, title, content) => {
   try {
     await BlogPost.update({ title, content }, { where: { id } });

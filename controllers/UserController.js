@@ -49,7 +49,7 @@ const deleteMe = async (req, res, next) => {
     if (user.err) {
       return res.status(StatusCodes.NOT_FOUND).json({ message: user.err.message });
     }
-    return res.status(StatusCodes.OK).json(user);
+    return res.status(StatusCodes.NO_CONTENT).json(user);
   } catch (err) {
     console.log(err);
     next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });

@@ -1,6 +1,8 @@
 const { StatusCodes } = require('http-status-codes');
 const BlogPostService = require('../services/BlogPostService');
 
+const INTERNAL_ERROR = 'Internal server error';
+
 const createPost = async (req, res, next) => {
   const { userId } = req;
   const { title, content, categoryIds } = req.body;
@@ -13,7 +15,7 @@ const createPost = async (req, res, next) => {
     return res.status(StatusCodes.CREATED).json(post);
   } catch (err) {
     console.log(err);
-    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
   }
 };
 
@@ -27,7 +29,7 @@ const deletePost = async (req, res, next) => {
     return res.status(StatusCodes.NO_CONTENT).json(deletedPost);
   } catch (err) {
     console.log(err);
-    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
   }
 };
 
@@ -37,7 +39,7 @@ const findAll = async (_req, res, next) => {
     return res.status(StatusCodes.OK).json(blogPosts);
   } catch (err) {
     console.log(err);
-    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
   }
 };
 
@@ -50,7 +52,7 @@ const findOne = async (req, res, next) => {
     return res.status(StatusCodes.OK).json(blogPost);
   } catch (err) {
     console.log(err);
-    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
   }
 };
 
@@ -69,8 +71,8 @@ const updatePost = async (req, res, next) => {
   return res.status(StatusCodes.OK).json(updatedPost);
 } catch (err) {
   console.log(err);
-  next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+  next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
 }
 };
 
-module.exports = { findAll, findOne, createPost, updatePost };
+module.exports = { findAll, findOne, createPost, updatePost, deletePost };

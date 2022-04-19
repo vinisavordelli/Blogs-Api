@@ -17,6 +17,20 @@ const createPost = async (req, res, next) => {
   }
 };
 
+const deletePost = async (req, res, next) => {
+  const { id } = req.parms;
+  try {
+    const deletedPost = await BlogPostService.deletePost(id);
+    if (deletedPost.err) {
+      return res.status(StatusCodes.BAD_REQUEST).json({ message: deletedPost.err.message });
+    }
+    return res.status(StatusCodes.NO_CONTENT).json(deletedPost);
+  } catch (err) {
+    console.log(err);
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: 'Internal server error' });
+  }
+};
+
 const findAll = async (_req, res, next) => {
   try {
     const blogPosts = await BlogPostService.findAll();

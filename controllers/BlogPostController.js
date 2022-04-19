@@ -79,4 +79,15 @@ if (deletedPost.user.id !== userId) {
   }
 };
 
-module.exports = { findAll, findOne, createPost, updatePost, deletePost };
+const searchPost = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+    const searchResult = await BlogPostService.searchPost(q);
+    return res.status(StatusCodes.OK).json(searchResult);
+  } catch (err) {
+    console.log(err);
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
+  }
+};
+
+module.exports = { findAll, findOne, createPost, updatePost, deletePost, searchPost };

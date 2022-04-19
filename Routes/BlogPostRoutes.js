@@ -5,6 +5,7 @@ const {
   createPost,
   updatePost,
   deletePost,
+  searchPost,
 } = require('../controllers/BlogPostController');
 const {
   validateBlogPostCreation,
@@ -15,6 +16,7 @@ const { ValidateToken } = require('../middlewares/ValidateToken');
 const router = express.Router();
 
 router
+.get('/search', ValidateToken, searchPost)
 .get('/', ValidateToken, findAll)
 .get('/:id', ValidateToken, findOne)
 .post(

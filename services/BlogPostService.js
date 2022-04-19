@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, User, Category, PostCategory } = require('../models');
 
 const createPost = async ({ title, content, categoryIds, userId }) => {
@@ -87,4 +88,25 @@ const updatePost = async (id, title, content) => {
   }
 };
 
-module.exports = { findAll, findOne, createPost, updatePost, deletePost };
+const searchPost = async (searchTerm) => {
+  if (!searchTerm) return findAll();
+ try {
+    const post = await BlogPost.findAll({
+      where: { [Op.or]: [
+        { title: searchTerm },
+        { content: searchTerm },
+      ] },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    if (post) return post;
+    return [];
+  } catch (err) {
+    console.log(err);
+    return ({ message: 'Unknown error' });
+  } 
+};
+
+module.exports = { findAll, findOne, createPost, updatePost, deletePost, searchPost };

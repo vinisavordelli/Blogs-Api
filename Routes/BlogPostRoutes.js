@@ -1,5 +1,11 @@
 const express = require('express');
-const { findAll, findOne, createPost, updatePost } = require('../controllers/BlogPostController');
+const {
+  findAll,
+  findOne,
+  createPost,
+  updatePost,
+  deletePost,
+} = require('../controllers/BlogPostController');
 const {
   validateBlogPostCreation,
   validatePostUpdate,
@@ -17,5 +23,6 @@ ValidateToken,
 validateBlogPostCreation, 
 createPost,
 )
-.put('/:id', ValidateToken, validatePostUpdate, updatePost);
+.put('/:id', ValidateToken, validatePostUpdate, updatePost)
+.delete('/:id', ValidateToken, deletePost);
 module.exports = router;

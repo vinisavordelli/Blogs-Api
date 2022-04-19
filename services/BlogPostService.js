@@ -50,11 +50,18 @@ const findOne = async (id) => {
 
 const deletePost = async (id) => {
   try {
-    const deletedPost = await BlogPost.destroy({ where: { id } });
-    if (!deletedPost) {
+    const blogPost = await BlogPost.findOne({
+      where: { id },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    if (!blogPost) {
       return { err: { message: 'Post does not exist' } };
     }
-    return deletedPost;
+    await BlogPost.destroy({ where: { id } });
+    return blogPost;
   } catch (err) {
     console.log(err);
     return ({ message: 'Unknown error' });
@@ -80,4 +87,4 @@ const updatePost = async (id, title, content) => {
   }
 };
 
-module.exports = { findAll, findOne, createPost, updatePost };
+module.exports = { findAll, findOne, createPost, updatePost, deletePost };

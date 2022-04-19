@@ -19,20 +19,6 @@ const createPost = async (req, res, next) => {
   }
 };
 
-const deletePost = async (req, res, next) => {
-  const { id } = req.parms;
-  try {
-    const deletedPost = await BlogPostService.deletePost(id);
-    if (deletedPost.err) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ message: deletedPost.err.message });
-    }
-    return res.status(StatusCodes.NO_CONTENT).json(deletedPost);
-  } catch (err) {
-    console.log(err);
-    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
-  }
-};
-
 const findAll = async (_req, res, next) => {
   try {
     const blogPosts = await BlogPostService.findAll();
@@ -73,6 +59,24 @@ const updatePost = async (req, res, next) => {
   console.log(err);
   next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
 }
+};
+
+const deletePost = async (req, res, next) => {
+  const { userId } = req;
+  const { id } = req.params;
+  try {
+    const deletedPost = await BlogPostService.deletePost(id);
+    if (deletedPost.err) {
+ return res.status(StatusCodes.NOT_FOUND).json({ message: 'Post does not exist' }); 
+}
+if (deletedPost.user.id !== userId) {
+  return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Unauthorized user' });
+}
+    return res.status(StatusCodes.NO_CONTENT).json(deletedPost);
+  } catch (err) {
+    console.log(err);
+    next({ statusCode: StatusCodes.INTERNAL_SERVER_ERROR, message: INTERNAL_ERROR });
+  }
 };
 
 module.exports = { findAll, findOne, createPost, updatePost, deletePost };
